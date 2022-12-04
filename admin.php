@@ -1,5 +1,5 @@
 <?php 
-
+    session_start();
     include ("include/connection.php");
 
     if(isset($_POST['login'])){
@@ -25,8 +25,8 @@
             if(mysqli_num_rows($resurt) == 1){
                 echo "<script> alert('Bạn đã đăng nhập với tư cách quản trị viên') </script>"; 
                 $_SESSION['admin']=$username;
-                //header("Location:");
-                
+                header("Location:admin/index.php");
+                exit();
             }else{
                 echo "<script>alert('Tài khoản và mật khẩu không hợp lệ') </script>";
             }
@@ -55,11 +55,11 @@
                 <div class="col-md-6 jumbotron">
                     <img src="img/admin.jpg" class="col-md-12" alt="">
                     <form action="" method="post" class="my-2">
-                        <div class="alert alert-danger">
+                        <div>
                             <?php 
                                 if(isset($error['admin'])){
-                                    $show=$error['admin'];
-                                   
+                                    $sh=$error['admin'];
+                                   $show="<h4 class='alert alert-danger'>$sh</h4>";
                                 }else{
                                     $show="";
                                 }
